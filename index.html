@@ -50,13 +50,13 @@
             </div> -->
 
                 <p>Nombre de la tarea</p>
-                <input class="form-control mb-3 " type="text" name="" id="tarea" placeholder="Ingresa nombre" >
+                <input class="form-control mb-3 " type="text" name="" id="tarea" placeholder="Ingresa tarea" >
 
                 <p>Encargado</p>
-                <input class="form-control mb-3 " type="text" name="" id="encargado" placeholder="Ingresa nombre" >
+                <input class="form-control mb-3 " type="text" name="" id="encargado" placeholder="Ingresa encargado" >
             
                 <p>Fecha</p>
-                <input class="form-control mb-3" type="date" name="" id="dateInput">
+                <input class="form-control mb-3" type="date" name="" id="date">
             
                 <p>Descripción</p>
                 <textarea class="form-control mb-3" name="" id="textarea" cols="30" rows="5"></textarea>
@@ -68,7 +68,7 @@
             <table class="table dimension">
                 <thead class="table-dark">
                 <tr>
-                    <th scope="col" class="tarea">Tarea</th>
+                    <th scope="col">Tarea</th>
                     <th scope="col">Encargado</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Descripción</th>
@@ -77,17 +77,17 @@
                     
                 </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                <tr>
+                <tbody class="table-group-divider" id="lista">
+          <!--       <tr>
                     <td>Añadir Estilos</td>
                     <td>Cristian</td>
                     <td>21-09-2022</td>
                     <td>Completar elementos</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Editar</button>
+                        <button type="button" class="btn btn-primary" id="editar">Editar</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger eliminar">Eliminar</button>
+                        <button type="button" class="btn btn-danger" id=" eliminar">Eliminar</button>
                     </td>
 
                 </tr>
@@ -103,10 +103,11 @@
                         <button type="button" class="btn btn-danger eliminar">Eliminar</button>
                     </td>
                 </tr>
-                
+                 -->
                 </tbody>
             </table>
         </div>
+        <script src="main.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>  
 </body>
 </html>
