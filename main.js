@@ -12,7 +12,7 @@ const encargado = document.getElementById('encargado');
 const date = document.getElementById('date');
 const textarea = document.getElementById('textarea');
 const agregar = document.getElementById('agregar');
-
+const actualizar = document.getElementById('actualizar');
 
 let tareas =[ ];
 
@@ -30,7 +30,7 @@ const llenarLista = () => {
             <td>${tarea.fecha}</td>
             <td>${tarea.descripcion}</td>
             <td>
-                <button type="button" class="btn btn-primary" id ="editar">Editar</button>
+                <button type="button" class="btn btn-primary modifica" id=${tarea.id}>Editar</button>
             </td>
             <td>
                 <button type="button" class="btn btn-danger eliminar" id=${tarea.id}  >Eliminar</button>
@@ -39,19 +39,23 @@ const llenarLista = () => {
             </tr>
             `;
     }); 
-    
+
+    const modButtons = Array.from(document.getElementsByClassName('btn btn-primary modifica')); //codigo nuevo
+    modButtons.forEach((modButton) => {
+    modButton.addEventListener('click', (event)=>completarInput(event.target.id)); //codigo nuevo
+}); 
+
     const deleteButtons = Array.from(document.getElementsByClassName('btn btn-danger eliminar'));
     deleteButtons.forEach((button) => {
     button.addEventListener('click', (event)=> eliminaUsuario(event.target.id));
     
 });
+    actualizar.addEventListener('click', (event)=>editar(event.target.getAttribute('elemento')))
     
+
 }
 
-llenarLista();
-
 const creaElemento = ( ) => {
-
     let newTarea = {
         id: Date.now(),
         tarea: tarea.value,
@@ -59,24 +63,48 @@ const creaElemento = ( ) => {
         fecha: date.value,
         descripcion: textarea.value
     }
-    /* tareas[newTarea.id] = newTarea; */
-
+    
     tareas.push(newTarea);
     localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas));
     console.log(tareas);
     llenarLista();
+    tarea.value = '';
+    encargado.value = '';
+    date.value = '';
+    textarea.value = '';
 }
-
 
 agregar.addEventListener('click', creaElemento);
 
+function completarInput(id){
+    actualizar.setAttribute('elemento', id)
+    
+    let tareaEncontrada = tareas.find((tarea)=>tarea.id == id);
+    console.log(tareaEncontrada);
+    tarea.value = tareaEncontrada.tarea;
+    encargado.value = tareaEncontrada.encargado;
+    date.value = tareaEncontrada.fecha;
+    textarea.value = tareaEncontrada.descripcion;
+}
 
-/* let btnsEliminar = document.getElementsByClassName */
+llenarLista();
 
-/* const eliminaTareas = Array.from(document.getElementsByClassName('btn btn-danger eliminar'));
-eliminaTareas.forEach((button) => {
-    button.addEventListener('click', (event)=>eliminaUsuario(event.target.id));
-}); */
+function editar(id){
+    tareas.forEach(tarea=>{
+        if(tarea.id == id){
+            tarea.tarea = tarea.value
+            tarea.encargado = encargado.value
+            tarea.fecha = date.value
+            tarea.descripcion = textarea.value
+        }
+    })
+    
+    llenarLista();
+    tarea.value = '';
+    encargado.value = '';
+    date.value = '';
+    textarea.value = '';
+}
 
 
 
