@@ -59,7 +59,7 @@ const creaElemento = ( ) => {
     }
     
     tareas.push(newTarea);
-    /* localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas)); */
+    localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas));
     console.log(tareas);
     llenarLista();
     tarea.value = '';
