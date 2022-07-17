@@ -1,11 +1,3 @@
- //Seleccionar los elementos  inputs, fecha, y descripcion,  capturar sus datos, verificar si contienen datos
-
- //El boton agregar debe insertar los datos que contienen los elementos a la tabla donde se mostraran
-
- //Boton modificar devuelve los datos a el formulario para poder cambiar sus valores  debe existir un boton
- //Guardar que confirme los cambios y debe devolverlos a la tabla.
-
- //Boton eliminar debe borrar un elemento de la tabla.
 
 const tarea = document.getElementById('tarea');
 const encargado = document.getElementById('encargado');
@@ -40,19 +32,19 @@ const llenarLista = () => {
             `;
     }); 
 
-    const modButtons = Array.from(document.getElementsByClassName('btn btn-primary modifica')); //codigo nuevo
+    const modButtons = Array.from(document.getElementsByClassName('btn btn-primary modifica')); //coleccion de botones HTML
     modButtons.forEach((modButton) => {
-    modButton.addEventListener('click', (event)=>completarInput(event.target.id)); //codigo nuevo
+    modButton.addEventListener('click', (event)=>completarInput(event.target.id)); 
+    
 }); 
 
-    const deleteButtons = Array.from(document.getElementsByClassName('btn btn-danger eliminar'));
+    const deleteButtons = Array.from(document.getElementsByClassName('btn btn-danger eliminar')); //Coleccion de botones HTML
     deleteButtons.forEach((button) => {
-    button.addEventListener('click', (event)=> eliminaUsuario(event.target.id));
+    button.addEventListener('click', (event)=> eliminaUsuario(event.target.id));    
     
 });
-    actualizar.addEventListener('click', (event)=>editar(event.target.getAttribute('elemento')))
+    actualizar.addEventListener('click', (event)=>editar(event.target.getAttribute('elemento')));    
     
-
 }
 
 const creaElemento = ( ) => {
@@ -77,36 +69,37 @@ const creaElemento = ( ) => {
 agregar.addEventListener('click', creaElemento);
 
 function completarInput(id){
-    actualizar.setAttribute('elemento', id)
-    
+    actualizar.setAttribute('elemento', id)    
     let tareaEncontrada = tareas.find((tarea)=>tarea.id == id);
     console.log(tareaEncontrada);
     tarea.value = tareaEncontrada.tarea;
     encargado.value = tareaEncontrada.encargado;
     date.value = tareaEncontrada.fecha;
     textarea.value = tareaEncontrada.descripcion;
+
+       
 }
 
 llenarLista();
 
 function editar(id){
+    
+    
     tareas.forEach(tarea=>{
-        if(tarea.id == id){
+        if(tarea.id === id){
             tarea.tarea = tarea.value
             tarea.encargado = encargado.value
             tarea.fecha = date.value
             tarea.descripcion = textarea.value
         }
     })
-    
-    llenarLista();
+   
+    llenarLista();    
     tarea.value = '';
     encargado.value = '';
     date.value = '';
     textarea.value = '';
 }
-
-
 
 function eliminaUsuario(id){
     /* console.log(id); */
