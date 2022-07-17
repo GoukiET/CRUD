@@ -1,13 +1,15 @@
+/* Inputs */
+let tarea = document.getElementById('tarea');
+let encargado = document.getElementById('encargado');
+let date = document.getElementById('date');
+let textarea = document.getElementById('textarea');
+let agregar = document.getElementById('agregar');
+let actualizar = document.getElementById('actualizar');
 
-const tarea = document.getElementById('tarea');
-const encargado = document.getElementById('encargado');
-const date = document.getElementById('date');
-const textarea = document.getElementById('textarea');
-const agregar = document.getElementById('agregar');
-const actualizar = document.getElementById('actualizar');
-
+/* Array */
 let tareas =[ ];
 
+/* Lista */
 const lista = document.getElementById('lista');
 const llenarLista = () => {
     if(localStorage.getItem('tareaLocalStorage')){ 
@@ -42,8 +44,8 @@ const llenarLista = () => {
     deleteButtons.forEach((button) => {
     button.addEventListener('click', (event)=> eliminaUsuario(event.target.id));    
     
-});
-    actualizar.addEventListener('click', (event)=>editar(event.target.getAttribute('elemento')));    
+});   
+    actualizar.addEventListener('click', (event)=>editar(event.target.getAttribute('elemento')));
     
 }
 
@@ -57,7 +59,7 @@ const creaElemento = ( ) => {
     }
     
     tareas.push(newTarea);
-    localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas));
+    /* localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas)); */
     console.log(tareas);
     llenarLista();
     tarea.value = '';
@@ -69,31 +71,31 @@ const creaElemento = ( ) => {
 agregar.addEventListener('click', creaElemento);
 
 function completarInput(id){
-    actualizar.setAttribute('elemento', id)    
-    let tareaEncontrada = tareas.find((tarea)=>tarea.id == id);
+    actualizar.setAttribute('elemento', id);    
+    let tareaEncontrada = tareas.find((tarea)=>tarea.id == id);       
     console.log(tareaEncontrada);
     tarea.value = tareaEncontrada.tarea;
     encargado.value = tareaEncontrada.encargado;
     date.value = tareaEncontrada.fecha;
-    textarea.value = tareaEncontrada.descripcion;
-
+    textarea.value = tareaEncontrada.descripcion; 
+    
+    /* localStorage.getItem('tareaLocalStorage' , JSON.stringify(tareas)); */   
        
 }
-
+ 
 llenarLista();
 
-function editar(id){
-    
-    
+function editar(id){  
     tareas.forEach(tarea=>{
-        if(tarea.id === id){
+        if(tarea.id == id){
             tarea.tarea = tarea.value
             tarea.encargado = encargado.value
             tarea.fecha = date.value
             tarea.descripcion = textarea.value
         }
+        
     })
-   
+    console.log(tareas); 
     llenarLista();    
     tarea.value = '';
     encargado.value = '';
@@ -103,11 +105,9 @@ function editar(id){
 
 function eliminaUsuario(id){
     /* console.log(id); */
-   tareas = tareas.filter((tarea)=>tarea.id != id)
+   tareas = tareas.filter((tarea)=>tarea.id != id);
    localStorage.setItem('tareaLocalStorage' , JSON.stringify(tareas));
-   
-   /* localStorage.removeItem(id); */
-    console.log(tareas);
-    llenarLista();
+   console.log(tareas);
+   llenarLista();
 }
 
